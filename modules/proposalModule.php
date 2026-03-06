@@ -1,60 +1,59 @@
-<?php
-require_once __DIR__ . '/../services/aiService.php';
-require_once __DIR__ . '/../config/db.php';
+ <?php
 
-function generateProposal($industry, $budget, $focus) {
+require_once __DIR__.'/../config/db.php';
 
-    global $conn;
+function generateCategory($name,$description,$material){
 
-    $prompt = "
-    Create a sustainable B2B proposal.
+global $conn;
 
-    Industry: $industry
-    Budget: ₹$budget
-    Focus: $focus
+$nameLower=strtolower($name);
 
-    Return ONLY JSON with:
-    product_mix
-    budget_allocation
-    cost_breakdown (must include total)
-    impact_summary
-    ";
+/* Dynamic Category Logic */
 
-    $response = callOpenAI($prompt);
-
-    if (!isset($response['choices'][0]['message']['content'])) {
-        throw new Exception("Invalid AI response structure");
-    }
-
-    $content = $response['choices'][0]['message']['content'];
-
-    $jsonOutput = json_decode($content, true);
-
-    if (!$jsonOutput) {
-        throw new Exception("Invalid AI JSON response");
-    }
-
-    // 🔥 Business Logic Validation (Important for Assignment)
-    if ($jsonOutput['cost_breakdown']['total'] > $budget) {
-        throw new Exception("Generated proposal exceeds given budget.");
-    }
-
-    $stmt = $conn->prepare(
-        "INSERT INTO proposals (industry, budget, focus, ai_output) VALUES (?, ?, ?, ?)"
-    );
-
-    if (!$stmt) {
-        throw new Exception("Database prepare failed: " . $conn->error);
-    }
-
-    $stmt->bind_param("siss", $industry, $budget, $focus, $content);
-
-    if (!$stmt->execute()) {
-        throw new Exception("Database insert failed: " . $stmt->error);
-    }
-
-    $stmt->close();
-
-    return $jsonOutput;
+if(strpos($nameLower,'bag')!==false){
+$primary="Bags";
+$sub="Eco Friendly Bags";
 }
-?>
+elseif(strpos($nameLower,'bottle')!==false){
+$primary="Drinkware";
+$sub="Reusable Bottles";
+}
+else{
+$primary="Eco Products";
+$sub="Sustainable Items";
+}
+
+/* Structured Array Output */
+
+$result=[
+"primary_category"=>$primary,
+"sub_category"=>$sub,
+"seo_tags"=>[
+"eco ".$name,
+$material." ".$name,
+"sustainable ".$name,
+"reusable ".$name,
+"eco friendly"
+],
+"sustainability_filters"=>[
+"plastic-free",
+"reusable",
+"eco-friendly"
+]
+];
+
+/* Save JSON in DB */
+
+$json=json_encode($result);
+
+$stmt=$conn->prepare(
+"INSERT INTO products(name,description,material,ai_output)
+VALUES (?,?,?,?)"
+);
+
+$stmt->bind_param("ssss",$name,$description,$material,$json);
+$stmt->execute();
+
+return $result;
+
+}
