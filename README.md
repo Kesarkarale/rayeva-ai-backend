@@ -226,12 +226,12 @@ http://localhost/rayeva-ai
 # 📸 Screenshots
 
 ### Category 
-![Category](category.png)
+![Category](category .png)
 ### Category Output
 ![Category Output](category-output.png)
 
 ### Proposal 
-![Proposal](proposal.png)
+![Proposal](proposal .png)
 
 ### Proposal Output
 ![Proposal](proposal-output.png)
