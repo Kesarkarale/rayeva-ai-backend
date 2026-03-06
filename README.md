@@ -226,15 +226,15 @@ http://localhost/rayeva-ai
 # 📸 Screenshots
 
 ### Category Generator
-![Category Page](C:\xampp\htdocs\rayeva-ai\category.png)
+![Category](category.png)
 ### Category Output
-![Category Output](screenshots/category-output.png)
+![Category Output](category output.png)
 
 ### Proposal Generator
-![Proposal Page](screenshots/proposal-page.png)
+![Proposal](proposal.png)
 
 ### Proposal Output
-![Proposal Output](screenshots/proposal-output.png)
+![Proposal Output](proposal output.png)
 ---
 
 # 🎥 Demo Video
