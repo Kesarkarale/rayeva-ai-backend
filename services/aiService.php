@@ -1,79 +1,58 @@
-<?php
+  <?php
 
-function callOpenAI($prompt) {
+require_once __DIR__.'/../config/config.php';
 
-    // If proposal related prompt
-    if (strpos($prompt, "B2B proposal") !== false) {
+function callOpenAI($prompt){
 
-        $fakeResponse = [
-            "choices" => [
-                [
-                    "message" => [
-                        "content" => json_encode([
-                            "product_mix" => [
-                                [
-                                    "product" => "Compostable Packaging Kits",
-                                    "quantity" => 500,
-                                    "unit_price" => 50
-                                ],
-                                [
-                                    "product" => "Reusable Office Bottles",
-                                    "quantity" => 200,
-                                    "unit_price" => 150
-                                ]
-                            ],
-                            "budget_allocation" => [
-                                "packaging" => 25000,
-                                "office_products" => 30000
-                            ],
-                            "cost_breakdown" => [
-                                "subtotal" => 55000,
-                                "discount" => 5000,
-                                "total" => 50000
-                            ],
-                            "impact_summary" => "This proposal reduces plastic usage by replacing single-use packaging with compostable alternatives and promotes reusable office supplies, enhancing sustainability impact."
-                        ])
-                    ]
-                ]
-            ]
-        ];
+$apiKey = getenv("OPENAI_API_KEY");
 
-    } else {
+$url = "https://api.openai.com/v1/chat/completions";
 
-        // Category Module Fake Response
-        $fakeResponse = [
-            "choices" => [
-                [
-                    "message" => [
-                        "content" => json_encode([
-                            "primary_category" => "Packaging",
-                            "sub_category" => "Compostable Bags",
-                            "seo_tags" => [
-                                "eco friendly",
-                                "plastic free",
-                                "biodegradable",
-                                "sustainable",
-                                "green packaging"
-                            ],
-                            "sustainability_filters" => [
-                                "plastic-free",
-                                "compostable",
-                                "biodegradable"
-                            ]
-                        ])
-                    ]
-                ]
-            ]
-        ];
-    }
+$data = [
+"model" => "gpt-4o-mini",
+"messages" => [
+["role"=>"system","content"=>"Return only valid JSON."],
+["role"=>"user","content"=>$prompt]
+],
+"temperature" => 0.7
+];
 
-    // Logging
-    file_put_contents(
-        __DIR__ . '/../logs/ai_logs.txt',
-        "PROMPT:\n$prompt\nFAKE RESPONSE:\n" . json_encode($fakeResponse) . "\n\n",
-        FILE_APPEND
-    );
+$ch = curl_init($url);
 
-    return $fakeResponse;
+curl_setopt_array($ch,[
+CURLOPT_RETURNTRANSFER => true,
+CURLOPT_HTTPHEADER => [
+"Content-Type: application/json",
+"Authorization: Bearer ".$apiKey
+],
+CURLOPT_POST => true,
+CURLOPT_POSTFIELDS => json_encode($data)
+]);
+
+$response = curl_exec($ch);
+
+if(curl_errno($ch)){
+    throw new Exception("Curl Error: ".curl_error($ch));
 }
+
+curl_close($ch);
+
+$result = json_decode($response,true);
+
+if(!isset($result['choices'][0]['message']['content'])){
+    throw new Exception("Invalid AI Response");
+}
+
+$content = $result['choices'][0]['message']['content'];
+
+/* Extract JSON only */
+$start = strpos($content,'{');
+$end = strrpos($content,'}');
+$json = substr($content,$start,$end-$start+1);
+
+/* Convert JSON to PHP array */
+return json_decode($json,true);
+
+}
+
 ?>
