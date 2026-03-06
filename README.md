@@ -226,8 +226,7 @@ http://localhost/rayeva-ai
 # 📸 Screenshots
 
 ### Category Generator
-![Category Page](screenshots/category-page.png)
-
+![Category Page](C:\xampp\htdocs\rayeva-ai\category.png)
 ### Category Output
 ![Category Output](screenshots/category-output.png)
 
