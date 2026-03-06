@@ -225,12 +225,17 @@ http://localhost/rayeva-ai
 
 # 📸 Screenshots
 
-Add screenshots for:
+### Category Generator
+![Category Page](screenshots/category-page.png)
 
-* Category Generator Page
-* Proposal Generator Page
-* Output Results
+### Category Output
+![Category Output](screenshots/category-output.png)
 
+### Proposal Generator
+![Proposal Page](screenshots/proposal-page.png)
+
+### Proposal Output
+![Proposal Output](screenshots/proposal-output.png)
 ---
 
 # 🎥 Demo Video
