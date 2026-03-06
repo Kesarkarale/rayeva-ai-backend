@@ -225,12 +225,12 @@ http://localhost/rayeva-ai
 
 # 📸 Screenshots
 
-### Category Generator
+### Category 
 ![Category](category.png)
 ### Category Output
 ![Category Output](category-output.png)
 
-### Proposal Generator
+### Proposal 
 ![Proposal](proposal.png)
 
 ### Proposal Output
