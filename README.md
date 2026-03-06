@@ -228,13 +228,13 @@ http://localhost/rayeva-ai
 ### Category Generator
 ![Category](category.png)
 ### Category Output
-![Category Output](category output.png)
+![Category Output](category-output.png)
 
 ### Proposal Generator
 ![Proposal](proposal.png)
 
 ### Proposal Output
-![Proposal Output](proposal output.png)
+![Proposal](proposal-output.png)
 ---
 
 # 🎥 Demo Video
