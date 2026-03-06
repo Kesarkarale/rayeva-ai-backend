@@ -1,58 +1,33 @@
- <?php
+  <?php
 
-require_once __DIR__.'/../config/db.php';
+function generateProposal($industry,$budget,$focus){
 
-function generateCategory($name,$description,$material){
+/* Dynamic Calculation */
 
-global $conn;
+$kitPrice = 100;
+$bagPrice = 50;
 
-$nameLower=strtolower($name);
+$kitQty = floor(($budget*0.5)/$kitPrice);
+$bagQty = floor(($budget*0.5)/$bagPrice);
 
-/* Dynamic Category Logic */
-
-if(strpos($nameLower,'bag')!==false){
-$primary="Bags";
-$sub="Eco Friendly Bags";
-}
-elseif(strpos($nameLower,'bottle')!==false){
-$primary="Drinkware";
-$sub="Reusable Bottles";
-}
-else{
-$primary="Eco Products";
-$sub="Sustainable Items";
-}
-
-/* Structured Array Output */
+$subtotal = ($kitQty*$kitPrice)+($bagQty*$bagPrice);
 
 $result=[
-"primary_category"=>$primary,
-"sub_category"=>$sub,
-"seo_tags"=>[
-"eco ".$name,
-$material." ".$name,
-"sustainable ".$name,
-"reusable ".$name,
-"eco friendly"
+"product_mix"=>[
+["product"=>"Eco Packaging Kit","quantity"=>$kitQty,"unit_price"=>$kitPrice],
+["product"=>"Reusable Bags","quantity"=>$bagQty,"unit_price"=>$bagPrice]
 ],
-"sustainability_filters"=>[
-"plastic-free",
-"reusable",
-"eco-friendly"
-]
+"budget_allocation"=>[
+"eco_kits"=>$kitQty*$kitPrice,
+"bags"=>$bagQty*$bagPrice
+],
+"cost_breakdown"=>[
+"subtotal"=>$subtotal,
+"discount"=>0,
+"total"=>$subtotal
+],
+"impact_summary"=>"This proposal promotes sustainable packaging for ".$industry." industry with focus on ".$focus."."
 ];
-
-/* Save JSON in DB */
-
-$json=json_encode($result);
-
-$stmt=$conn->prepare(
-"INSERT INTO products(name,description,material,ai_output)
-VALUES (?,?,?,?)"
-);
-
-$stmt->bind_param("ssss",$name,$description,$material,$json);
-$stmt->execute();
 
 return $result;
 
