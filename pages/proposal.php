@@ -1,8 +1,8 @@
- <?php
+<?php
 require_once "../modules/proposalModule.php";
 ?>
 
-<h2>AI B2B Proposal Generator</h2>
+<h2>AI Proposal Generator</h2>
 
 <form method="POST">
 
@@ -15,19 +15,27 @@ Budget
 Focus
 <input type="text" name="focus" required><br><br>
 
-<button name="generate">Generate Proposal</button>
+<button type="submit" name="generate">Generate Proposal</button>
 
 </form>
 
 <?php
 
+$result = null;
+
 if(isset($_POST['generate'])){
 
-$result=generateProposal(
+$result = generateProposal(
 $_POST['industry'],
 $_POST['budget'],
 $_POST['focus']
 );
+
+}
+
+if($result){
+
+echo "<h3>Proposal Result</h3>";
 
 echo "<pre>";
 print_r($result);
