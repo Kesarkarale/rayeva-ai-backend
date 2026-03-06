@@ -1,19 +1,41 @@
-<?php
-require_once 'modules/proposalModule.php';
+ <!DOCTYPE html>
+<html>
 
-try {
+<head>
 
-$result = generateProposal(
-    "Corporate Office",
-    50000,
-    "Plastic Reduction"
-);
+<title>Rayeva AI Dashboard</title>
 
-echo "<pre>";
-print_r($result);
-echo "</pre>";
+<style>
 
-} catch (Exception $e) {
-    echo "Error: " . $e->getMessage();
+body{
+font-family:Arial;
+text-align:center;
+margin-top:80px;
 }
-?>
+
+a{
+display:block;
+width:250px;
+margin:20px auto;
+padding:15px;
+background:#007BFF;
+color:white;
+text-decoration:none;
+border-radius:6px;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<h1>Rayeva AI System</h1>
+
+<a href="pages/category.php">Category Generator</a>
+
+<a href="pages/proposal.php">Proposal Generator</a>
+
+</body>
+
+</html>
