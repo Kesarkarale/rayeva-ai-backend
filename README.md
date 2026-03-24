@@ -30,7 +30,7 @@ This module automatically generates product categories and SEO tags based on pro
 
 ### Example Output
 
- 
+```id="d1w9qk"
 Array
 (
     [primary_category] => Bags
@@ -73,7 +73,7 @@ This module generates sustainability product proposals based on industry require
 
 ### Example Output
 
- 
+```id="l9v1ac"
 Array
 (
     [product_mix] => Array
@@ -115,7 +115,8 @@ Array
 # 🧠 AI Prompt Design
 
 Example prompt used for the category generation:
- 
+
+```id="x6qk2s"
 Product Name: Cotton Bag
 Description: Student bag
 Material: Cotton
@@ -125,11 +126,11 @@ primary_category
 sub_category
 seo_tags
 sustainability_filters
- 
+```
 
 Example prompt for proposal generation:
 
-
+```id="c6szbx"
 Industry: Retail
 Budget: 2000
 Focus: Sustainable packaging
@@ -139,7 +140,7 @@ product_mix
 budget_allocation
 cost_breakdown
 impact_summary
-
+```
 
 ---
 
@@ -147,7 +148,7 @@ impact_summary
 
 The project follows a modular architecture to separate logic and presentation.
 
-
+```id="1z7jse"
 User Interface (Pages)
         ↓
 Business Logic (Modules)
@@ -155,13 +156,13 @@ Business Logic (Modules)
 AI Service Layer
         ↓
 Database Storage
-
+```
 
 ---
 
 # 📂 Project Structure
 
-
+```id="p8ctgl"
 rayeva-ai
 │
 ├── config
@@ -180,7 +181,7 @@ rayeva-ai
 │
 ├── index.php
 └── README.md
-
+```
 
 ---
 
@@ -189,7 +190,7 @@ rayeva-ai
 * PHP
 * MySQL
 * HTML / CSS
-* CURL (API integration)
+* cURL (API integration)
 
 ---
 
@@ -198,23 +199,25 @@ rayeva-ai
 1. Install **XAMPP** or any PHP server.
 2. Place the project folder inside:
 
-
+```id="0t48op"
 htdocs/
 ```
 
 3. Create database:
 
+```id="g78h13"
 rayeva_ai
 ```
 
 4. Create table:
 
+```id="8j0a71"
 products
 ```
 
 5. Run project in browser:
 
-
+```id="dke6qx"
 http://localhost/rayeva-ai
 ```
 
@@ -251,8 +254,6 @@ Include a **3–5 minute demo video** showing:
 Regal College of Technology & Management
 SNDT University
 
----
-
 # 📄 License
 
-This project is developed for educational and assignment purposes.
+This project is developed for educational and assignment
