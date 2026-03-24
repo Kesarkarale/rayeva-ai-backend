@@ -253,7 +253,4 @@ Include a **3–5 minute demo video** showing:
 **Kesar Karale**
 Regal College of Technology & Management
 SNDT University
-
-# 📄 License
-
-This project is developed for educational and assignment
+ 
